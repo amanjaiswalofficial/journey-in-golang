@@ -16,3 +16,5 @@ func main(){
 
 // go run <FILE_NAME> -- compiles and executes a file
 // go build -- creates an executable under folder_name that can be run by ./<FOLDER_NAME>
+
+// NOTE: Ctrl+Shift+P -> go: install/update tools -> will install required packages
