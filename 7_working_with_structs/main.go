@@ -1,3 +1,7 @@
+/*
+	This example deals with Structs
+*/
+
 package main
 
 import "fmt"
@@ -21,42 +25,43 @@ type personWithContact struct {
 
 func main() {
 
-	// Initializng a struct with values
 	aman := person{firstName: "Aman", lastName: "Jaiswal"}
-	fmt.Println(aman)
-	fmt.Println("-------")
-	fmt.Println("Printing Empty struct")
-
-	var aman2 person
-	/*
-		When initialized with no values, a struct variable fills its properties
-		With null values, i.e. "" for Strings, 0 for Int/Float and False for Bool
-	*/
-	fmt.Println(aman2)
-	fmt.Println("-------")
-
-	// Assigning values to a struct variable
-	fmt.Println("Printing Struct with assigned values")
-	aman2.firstName = "Aman"
-	aman2.lastName = "Jaiswal"
-	fmt.Println(aman2)
-
-	// Using struct as type in another struct
-	fmt.Println("Using struct as datatype in another")
 
 	/*
-		In initialization as done below,
-		Its compulsory to put , after every property assignment
-		Even after the last one in every struct declaration
+		IMPORTANT:
+		Passing variable like this won't update its value
+		As in Go, call by value is done in such cases
+		Meaning Go on calling such functions create a copy of the data provided
+		Hence no change in the original value takes place.
 	*/
-	aman3 := personWithContact{
-		firstName: "Aman",
-		lastName: "Jaiswal",
-		contact: contactInfo {
-			zipCode: 2080,
-			email: "aman@gmail.com",
-		},
-	}
-	fmt.Println(aman3)
-	fmt.Println("-------")
+	aman.updateName("Amit")
+	fmt.Println("No change taking place on updating name")
+	aman.printPerson()
+	fmt.Println("----------")
+
+	/*
+		FIX:
+		To pass the address of the variable instead of value
+		By this the change made is permanent as it took place
+		On a variable's address/reference and not on its value
+	*/
+	amanPointer := &aman
+	amanPointer.updateNameByRef("Amit")
+	fmt.Println("Change takes place on accessing via address")
+	aman.printPerson()
+	fmt.Println("----------")
+
+}
+
+func (p person) printPerson() {
+	fmt.Println(p)
+}
+
+func (p person) updateName(newName string) {
+	p.firstName = newName
+}
+
+// Address pointer being passed which is accessed via *
+func (p *person) updateNameByRef(newName string){
+	(*p).firstName = newName
 }
