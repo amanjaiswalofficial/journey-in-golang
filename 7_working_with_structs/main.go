@@ -1,11 +1,16 @@
 /*
 	This example deals with Structs
+	1. Creating structs
+	2. Adding methods for structs passing struct as receiver
+	3. Using one struct as datatype for another
+	Creations: person, personWithContact, printPerson()
 */
 
 package main
 
 import "fmt"
 
+// Custom type struct
 type person struct {
 	firstName string
 	lastName  string
@@ -16,52 +21,65 @@ type contactInfo struct {
 	zipCode int
 }
 
+// Using contactInfo as datatype for this
 type personWithContact struct {
 	firstName string
 	lastName string
+	// Alternative: 'contactInfo', 
+	// hence variable and its datatype are both contactInfo
 	contact contactInfo
 }
 
 
 func main() {
 
+	// Initializng a struct with values
 	aman := person{firstName: "Aman", lastName: "Jaiswal"}
+	fmt.Println(aman)
+	fmt.Println("-------")
+	fmt.Println("Printing Empty struct")
+
+	var aman2 person
+	/*
+		When initialized with no values, a struct variable fills its properties
+		With null values, i.e. "" for Strings, 0 for Int/Float and False for Bool
+	*/
+	fmt.Println(aman2)
+	fmt.Println("-------")
+
+	// Assigning values to a struct variable
+	fmt.Println("Printing Struct with assigned values")
+	aman2.firstName = "Aman"
+	aman2.lastName = "Jaiswal"
+	fmt.Println(aman2)
+
+	// Using struct as type in another struct
+	fmt.Println("-------")
+	fmt.Println("Using struct as datatype in another")
 
 	/*
-		IMPORTANT:
-		Passing variable like this won't update its value
-		As in Go, call by value is done in such cases
-		Meaning Go on calling such functions create a copy of the data provided
-		Hence no change in the original value takes place.
+		In initialization as done below,
+		Its compulsory to put , after every property assignment
+		Even after the last one in every struct declaration
 	*/
-	aman.updateName("Amit")
-	fmt.Println("No change taking place on updating name")
+	aman3 := personWithContact{
+		firstName: "Aman",
+		lastName: "Jaiswal",
+		contact: contactInfo {
+			zipCode: 2080,
+			email: "aman@gmail.com",
+		},
+	}
+	fmt.Println(aman3)
+	fmt.Println("-------")
+	fmt.Println("Using custom methods with structs, Ex- print a person struct")
 	aman.printPerson()
-	fmt.Println("----------")
 
-	/*
-		FIX:
-		To pass the address of the variable instead of value
-		By this the change made is permanent as it took place
-		On a variable's address/reference and not on its value
-	*/
-	amanPointer := &aman
-	amanPointer.updateNameByRef("Amit")
-	fmt.Println("Change takes place on accessing via address")
-	aman.printPerson()
-	fmt.Println("----------")
 
 }
 
+// Since this accepts person as a reciever, it will be available after
+// All person type structs
 func (p person) printPerson() {
 	fmt.Println(p)
-}
-
-func (p person) updateName(newName string) {
-	p.firstName = newName
-}
-
-// Address pointer being passed which is accessed via *
-func (p *person) updateNameByRef(newName string){
-	(*p).firstName = newName
 }
