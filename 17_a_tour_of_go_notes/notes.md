@@ -137,3 +137,59 @@ func pow(x, n, lim float64) float64 {
 }
 ```
 
+
+### Using switch in Go
+
+In case of Switch in Go, it only runs 1 case at a time, so no need to put `break` after every case as it will only execute one case and exit.
+
+```
+
+func main() {
+	value := 3
+	switch div := value%2; div {
+		case 0:
+		fmt.Println("Even number")
+	case 1:
+		fmt.Println("Odd number")
+	default:
+		fmt.Println("None of the above", div)
+	}
+}
+```
+
+### Switch without condition / alternative to if-else
+
+Here, it executes the first condition that is true and exits, hence can be used as an if-else chain.
+
+```
+func main() {
+	val := 16
+	switch {
+		case val>15:
+		fmt.Println("greater than 15")
+	case val>10:
+		fmt.Println("greater than 10")
+	case val>5:
+		fmt.Println("greater than 5")
+	}
+}
+```
+
+### Defer in Go
+
+A defer statement defers the execution of a function until the surrounding function returns. 
+
+
+The deferred call's arguments are evaluated immediately, but the function call is not executed until the surrounding function returns. 
+
+Also, a defer expression must be a function call
+
+```
+func main() {
+	defer fmt.Println("I'll run second")
+
+	fmt.Println("I'll run first")
+}
+```
+
+NOTE: more on `defer` required
