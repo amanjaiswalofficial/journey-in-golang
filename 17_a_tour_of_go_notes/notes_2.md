@@ -54,3 +54,21 @@ a := make([]int, 5)
 
 b := make([]int, 0, 5)
 ```
+
+### Type Assertion
+A type assertion provides access to an interface value's underlying concrete value. 
+
+```
+func main() {
+	var i interface{} = "hello"
+
+	s := i.(string)
+	fmt.Println(s)
+
+```
+An empty interface can have any kind of value
+When there's enough information about what kind of value it's storing
+
+A type assertion (Ex- `i.(string)`) can be used to get the value out
+
+Here, since it was known that the value inside the interface is string, a type assertion for string was used.
