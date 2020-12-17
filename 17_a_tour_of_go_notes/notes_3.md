@@ -34,3 +34,27 @@ func main() {
 ```
 
 As pointers allow to access and modify the original value instead of a copy of original, used more than normal variable receivers.
+
+### Pointer Indirectionn in functions
+
+```
+type Vertex struct {
+	X, Y float64
+}
+
+func (v *Vertex) Scale(f float64) {
+	v.X = v.X * f
+	v.Y = v.Y * f
+}
+
+func main() {
+	v := Vertex{3, 4}
+	(&v).Scale(3) // This works as per pointer receiver
+	v.Scale(2) // But, this also works, as Go automatically detects it
+
+	fmt.Println(v)
+}
+
+```
+
+Here, even though the method Scale is a receiver on a pointer of Vertex, `v` and `&v` both are accepted as valid pointer receiver for Scale() method.
