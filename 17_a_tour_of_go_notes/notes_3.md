@@ -58,3 +58,11 @@ func main() {
 ```
 
 Here, even though the method Scale is a receiver on a pointer of Vertex, `v` and `&v` both are accepted as valid pointer receiver for Scale() method.
+
+### Choosing pointer receivers
+
+Reasons to use pointer reciever over value receiver
+
+1.The method modifies the actual value and not its copy.
+2.Avoid copying value on each method call, which can be expensive on large structs.
+
