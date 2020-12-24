@@ -66,3 +66,43 @@ Reasons to use pointer reciever over value receiver
 1.The method modifies the actual value and not its copy.
 2.Avoid copying value on each method call, which can be expensive on large structs.
 
+### Interface In Go
+Set of method signatures, as per A Tour of Go
+
+```
+type Abser interface {
+	Abs() float64
+}
+
+type MyFloat float64
+
+func (f MyFloat) Abs() float64 {
+	if f < 0 {
+		return float64(-f)
+	}
+	return float64(f)
+}
+
+type Vertex struct {
+	X, Y float64
+}
+
+func (v *Vertex) Abs() float64 {
+	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+
+func main() {
+	var a Abser
+	f := MyFloat(-math.Sqrt2)
+	v := Vertex{3, 4}
+
+	a = f  // a MyFloat implements Abser
+	a = &v // a *Vertex implements Abser
+
+	a = v // *v implements Abser, v doesn't hence not interface
+
+	fmt.Println(a.Abs()) // won't work since pointing to v
+}
+```
+
+Here, `MyFloat` and `Vertex` both implement `Abs()`, as per required by the definition of Abser Interface, hence both `f` & `*v` are interfaces whereas no such method that accepts `v`as input, hence v isn't an interface.
