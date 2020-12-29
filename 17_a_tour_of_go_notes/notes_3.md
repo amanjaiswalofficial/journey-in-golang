@@ -106,3 +106,32 @@ func main() {
 ```
 
 Here, `MyFloat` and `Vertex` both implement `Abs()`, as per required by the definition of Abser Interface, hence both `f` & `*v` are interfaces whereas no such method that accepts `v`as input, hence v isn't an interface.
+
+
+### Interface Values
+
+```
+func main() {
+	var i I
+
+	i = &T{"Hello"}
+	describe(i)
+	i.M()
+
+	i = F(math.Pi)
+	describe(i)
+	i.M()
+}
+
+func describe(i I) {
+	fmt.Printf("(%v, %T)\n", i, i)
+}
+```
+Beneath the definition, an interface is more or less a tuple of (Value, Type)
+
+Returning output as
+
+```
+(&{Hello}, *main.T)
+Hello
+```
