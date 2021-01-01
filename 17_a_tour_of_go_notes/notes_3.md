@@ -124,7 +124,8 @@ func main() {
 }
 
 func describe(i I) {
-	fmt.Printf("(%v, %T)\n", i, i)
+	fmt.Printf("(%v, %
+	T)\n", i, i)
 }
 ```
 Beneath the definition, an interface is more or less a tuple of (Value, Type)
