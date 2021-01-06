@@ -136,3 +136,40 @@ Returning output as
 (&{Hello}, *main.T)
 Hello
 ```
+
+### Interface for nil underlying values
+
+If the value inside the interface is nil, then the interface will be called over a nil value
+```
+package main
+
+import "fmt"
+
+type I interface {
+	M()
+}
+
+type T struct {
+	S string
+}
+
+func (t *T) M() {
+	if t == nil {
+		fmt.Println("<nil>")
+		return
+	}
+	fmt.Println(t.S)
+}
+
+func main() {
+	var i I
+
+	var t *T
+	// will be called on a nil receiver
+	i = t
+	i.M()
+
+	i = &T{"hello"}
+	i.M()
+}
+```
