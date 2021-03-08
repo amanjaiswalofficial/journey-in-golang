@@ -9,7 +9,7 @@ import (
 // function to call and wait to end
 func worker(id int, wg *sync.WaitGroup) {
 
-	defer wg.Done()
+	defer wg.Done() // keep notifying that this method has executed
 
 	fmt.Printf("Worker %d starting\n", id)
 
