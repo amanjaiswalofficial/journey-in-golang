@@ -174,5 +174,8 @@ func main() {
 }
 ```
 
+### Using godoc for help on packages
 
-
+```
+godoc -http :6000
+```
