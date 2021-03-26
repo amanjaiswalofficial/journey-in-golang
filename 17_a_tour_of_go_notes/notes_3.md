@@ -179,3 +179,10 @@ func main() {
 ```
 godoc -http :6000
 ```
+
+### Using go build to make binaries
+
+Inside the folder containing .go file
+```
+go build
+```
