@@ -186,3 +186,9 @@ Inside the folder containing .go file
 ```
 go build
 ```
+
+To generate a build for Windows
+
+```
+GOOS=windows go build
+```
