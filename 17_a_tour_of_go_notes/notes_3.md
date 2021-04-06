@@ -192,3 +192,9 @@ To generate a build for Windows
 ```
 GOOS=windows go build
 ```
+
+To see documentation on any of the packages/methods
+
+```
+godoc -http 6060
+```
